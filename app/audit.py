@@ -90,9 +90,9 @@ def _g(*names):
 
 NSAIDS = _g("ibuprofen", "naproxen", "diclofenac", "ketorolac", "meloxicam", "celecoxib", "indomethacin", "etodolac", "nabumetone", "piroxicam", "ketoprofen", "aspirin")
 ACE = _g("lisinopril", "enalapril", "ramipril", "captopril", "benazepril", "quinapril", "fosinopril", "perindopril", "trandolapril", "moexipril")
-ARB = _g("losartan", "valsartan", "irbesartan", "olmesartan", "candesartan", "telmisartan", "azilsartan", "eprosartan")
+ARB = _g("losartan", "valsartan", "irbesartan", "olmesartan", "candesartan", "telmisartan", "azilsartan")
 STATINS = _g("atorvastatin", "simvastatin", "rosuvastatin", "lovastatin", "pravastatin", "pitavastatin", "fluvastatin")
-FQ = _g("ciprofloxacin", "levofloxacin", "moxifloxacin", "ofloxacin", "norfloxacin", "gemifloxacin")
+FQ = _g("ciprofloxacin", "levofloxacin", "moxifloxacin", "ofloxacin")
 TETRA = _g("doxycycline", "tetracycline", "minocycline", "demeclocycline", "tigecycline")
 PENICILLINS = _g("amoxicillin", "ampicillin", "penicillin", "penicillin v", "piperacillin", "dicloxacillin", "nafcillin", "oxacillin", "ticarcillin")
 CEPHALOSPORINS = _g("cephalexin", "cefazolin", "cefuroxime", "ceftriaxone", "cefdinir", "cefixime", "cefadroxil", "cefprozil", "cefpodoxime", "cefepime", "ceftazidime")
@@ -191,7 +191,6 @@ ORGAN_RULES = {  # name -> {organ: (level, why)}
     "isoniazid": {"hepatic": ("major", "Isoniazid can cause severe, sometimes fatal, liver injury.")},
     "leflunomide": {"hepatic": ("major", "Leflunomide carries a boxed warning for severe liver injury.")},
     "diclofenac": {"hepatic": ("moderate", "Diclofenac can raise liver enzymes and injure the liver.")},
-    "amoxicillin/clavulanate": {"hepatic": ("moderate", "Amoxicillin-clavulanate can cause liver injury.")},
 }
 for _n in NSAIDS - {"aspirin"}:
     ORGAN_RULES.setdefault(_n, {})["renal"] = ("major", "NSAIDs reduce blood flow to the kidneys and can cause acute kidney injury or worsen kidney disease.")

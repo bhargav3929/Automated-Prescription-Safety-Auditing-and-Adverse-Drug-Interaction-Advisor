@@ -8,5 +8,5 @@
  "error": "Couldn't verify one or more medication names in RxNorm/openFDA: Kryptonite200mg. Check the spelling and try again.",
  "quota_consumed": false,
  "advice_returned": false,
- "generated_at": "2026-11-24T09:57:04Z"
+ "generated_at": "2026-11-24T10:05:25Z"
 }

@@ -27,7 +27,7 @@
    "major": 0
   },
   "driven_by": "pairs",
-  "summary": "You are taking atorvastatin, a cholesterol‑lowering medicine, together with clarithromycin, an antibiotic. This combination is a major contraindication because clarithromycin can raise the level of atorvastatin in your body, increasing the risk of serious side effects. Talk with your doctor or pharmacist before using these two drugs together."
+  "summary": "You are taking atorvastatin and clarithromycin together. This combination is a major contraindication because clarithromycin can raise the level of atorvastatin in your blood, increasing the risk of serious side effects. Talk with your doctor or pharmacist about safer options."
  },
  "alerts": [],
  "patient": {
@@ -38,7 +38,7 @@
   "allergens": [],
   "flags": []
  },
- "context_advice": "As a standard adult, it’s especially important to check this interaction with your healthcare provider before starting clarithromycin.",
+ "context_advice": "Since you are a standard adult, it’s important to discuss any medication changes with your healthcare provider.",
  "drugs": [
   {
    "input": "Atorvastatin",
@@ -204,29 +204,29 @@
     "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22atorvastatin%22+AND+patient.drug.openfda.generic_name%3A%22clarithromycin%22&count=patient.reaction.reactionmeddrapt.exact"
    },
    "explanation": {
-    "why": "Clarithromycin blocks the enzymes that clear atorvastatin, so the amount of atorvastatin can become too high, which can damage muscles and the liver.",
+    "why": "Clarithromycin blocks the enzyme that clears atorvastatin, so the statin can build up to dangerous levels.",
     "symptoms": [
-     "muscle pain or tenderness",
-     "muscle weakness",
+     "muscle pain or weakness",
      "dark-colored urine",
-     "unusual fatigue"
+     "unusual fatigue",
+     "yellowing of the skin or eyes"
     ],
-    "timing": "Do not take them together unless a doctor says it is safe; the doctor may need to lower the atorvastatin dose or choose a different antibiotic, and may want lab tests to monitor your health.",
+    "timing": "The interaction can occur quickly, so avoid taking these two drugs together and ask your doctor to check your labs if you have taken them together.",
     "questions": [
-     "Can I safely take clarithromycin with my current dose of atorvastatin?",
-     "Do I need a lower dose of atorvastatin while on clarithromycin?",
-     "Are there alternative antibiotics that do not interact with atorvastatin?"
+     "Can I take a lower dose of atorvastatin while on clarithromycin?",
+     "Is there a safer antibiotic I can use instead of clarithromycin?",
+     "Do I need blood tests to monitor for muscle or liver problems?"
     ]
    }
   }
  ],
  "context_notes": [],
  "questions": [
-  "Can I safely take clarithromycin with my current dose of atorvastatin?",
-  "Do I need a lower dose of atorvastatin while on clarithromycin?",
-  "Is my current cholesterol medication dose appropriate while I am on antibiotics?",
-  "What signs should I watch for that indicate a problem with this combination?",
-  "Should I have any blood tests while taking these medicines?"
+  "Can I take a lower dose of atorvastatin while on clarithromycin?",
+  "Is there a safer antibiotic I can use instead of clarithromycin?",
+  "Are there any other medicines or supplements I should avoid while taking atorvastatin?",
+  "How often should I have blood tests while on this medication?",
+  "What signs should prompt me to seek immediate medical help?"
  ],
  "telemetry": {
   "rxnorm_urls": [
@@ -247,5 +247,5 @@
  "source": "groq",
  "model": "openai/gpt-oss-120b",
  "disclaimer": "Educational Decision-Support Only — Not Medical Advice: Always consult a licensed physician or pharmacist before starting, stopping, or changing any prescribed medication.",
- "generated_at": "2026-11-24T09:57:04Z"
+ "generated_at": "2026-11-24T10:05:25Z"
 }

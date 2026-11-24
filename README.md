@@ -25,21 +25,22 @@ Click **API Keys** in the top-right of the app and paste your key (it starts wit
 
 1. Click one of the **sample regimens**, such as *Warfarin + Aspirin + Ibuprofen*. The saved result opens instantly and uses none of your runs.
 2. To try your own list, type a medicine name and press **Enter**. Each chip shows its RxNorm code (RxCUI) once the name is recognised. You can also click **Paste a list** and paste lines like `Warfarin 5 mg, Aspirin 81 mg`.
-3. Choose the patient context (older adult, kidney or liver sensitivity, pregnancy, or your own note).
-4. Click **Audit this regimen**. You get a safety score, a network diagram and a matrix of every drug pair. Click any pair to read why it happens, the symptoms to watch for, the FDA label excerpts and the FDA adverse-event report counts.
+3. Choose the patient context: Pediatric / Child, Older Adult, Kidney or Liver Sensitivity, Pregnancy / Breast-feeding, or Drug Allergy. You can also type your own note, such as `kid with 3 year old`, `pregnant`, `kidney failure` or `penicillin allergy`. The app reads it and applies the matching safety rules.
+4. Click **Audit this regimen**. You get a safety score, a network diagram and a matrix of every drug pair. Above the matrix, **Patient-Context & Safety Rule Alerts** show problems that are about the patient, not just the drug pairs: a medicine that is not appropriate for a child, a pregnancy or breast-feeding concern, a kidney or liver risk, an allergy cross-reaction, or two medicines from the same drug class. These alerts lower the safety score, so the verdict is never "low risk" while one is active. Click any pair to read why it happens, the symptoms to watch for, the FDA label excerpts and the FDA adverse-event report counts.
 5. **Safer Alternative Explorer** compares your list before and after swapping one medicine. **Pharmacist Question Sheet** turns the questions into a printable checklist.
 6. **History** keeps your recent audits. You get 15 live audits per hour. A run that fails, or a name that cannot be verified, does not use one up.
 
-**Good to know:** It reads label text and adverse-event counts. It does not know your doses, history or other conditions, and it cannot replace a pharmacist's review.
+**Good to know:** the safety rules are written down in `app/audit.py` and each was matched against real FDA label text with `scripts/verify_rules.py`, but they are a teaching aid, not a clinical product.  It reads label text and adverse-event counts. It does not know your doses, history or other conditions, and it cannot replace a pharmacist's review.
 
 ## 5. How it works
 
 1. `app/clinical.py` cleans each name and looks it up in RxNorm (`rxnav.nlm.nih.gov`). It then downloads the openFDA drug label for each medicine and reads the boxed warning, contraindications, drug interactions and warnings sections. A name that RxNorm or openFDA does not know is rejected before anything else happens.
 2. The same file cross-matches every pair of labels. If one label mentions the other drug, or its drug class, the sentence is kept and a severity is set by fixed rules. It also fetches how many FDA adverse-event (FAERS) reports list both drugs.
-3. `app/pipeline.py` builds the safety score and sends the evidence to Groq. The AI only explains in plain English. It cannot change a severity.
-4. `app/ai_groq.py` makes every Groq call, with a timeout, retries and a backup model.
-5. `app/access.py` and `app/db.py` count your 15 hourly runs in a local SQLite file and give a run back when something fails.
-6. `app/main.py` serves the pages and the API. The screens are in `static/` (`index.html`, `styles.css` and the scripts in `static/js/`).
+3. `app/audit.py` reads the patient context and applies fixed safety rules (age, pregnancy, kidney, liver, allergy and same-class duplication). Each alert quotes the drug's own FDA label when it has a matching sentence.
+4. `app/pipeline.py` combines the pair results and the alerts into one verdict and safety score, then sends the evidence to Groq. The AI only explains in plain English. It cannot change a severity or a score.
+5. `app/ai_groq.py` makes every Groq call, with a timeout, retries and a backup model.
+6. `app/access.py` and `app/db.py` count your 15 hourly runs in a local SQLite file and give a run back when something fails.
+7. `app/main.py` serves the pages and the API. The screens are in `static/` (`index.html`, `styles.css` and the scripts in `static/js/`).
 
 ## 6. Project structure
 
@@ -52,7 +53,8 @@ Click **API Keys** in the top-right of the app and paste your key (it starts wit
 ├── app/
 │   ├── main.py              web server and API routes
 │   ├── clinical.py          RxNorm + openFDA lookups and pair matching
-│   ├── pipeline.py          audit, safety score and the alternative comparison
+│   ├── audit.py             patient-context safety rules and duplication alerts
+│   ├── pipeline.py          verdict, safety score and the alternative comparison
 │   ├── ai_groq.py           all Groq calls
 │   ├── access.py            hourly run limit
 │   ├── db.py                SQLite storage
@@ -64,7 +66,11 @@ Click **API Keys** in the top-right of the app and paste your key (it starts wit
 │   └── js/                  api.js, network.js, render.js, app.js
 ├── samples/                 4 sample regimens
 │   └── results/             saved results for each sample
-└── scripts/record_samples.py
+└── scripts/
+    ├── record_samples.py    re-record the saved sample results
+    ├── test_ai_retry.py     offline test of Groq retries and the backup model
+    ├── test_demo_access.py  offline test of the run limits
+    └── verify_rules.py      checks the safety rules against the FDA label text
 ```
 
 ## 7. Troubleshooting

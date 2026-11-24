@@ -27,7 +27,7 @@
    "major": 0
   },
   "driven_by": "pairs",
-  "summary": "You are taking metformin for diabetes and lisinopril for blood pressure. Together they are considered low‑risk, but the combination can sometimes make your blood sugar drop lower than expected. Keep an eye on how you feel and talk to your health‑care team if you notice any changes."
+  "summary": "Taking metformin and lisinopril together is generally considered low risk, but the combination can make your blood sugar drop lower than expected. Watch for signs of low blood sugar and let your doctor know if they occur. Overall, the regimen is safe for most adults when monitored properly."
  },
  "alerts": [],
  "patient": {
@@ -38,7 +38,7 @@
   "allergens": [],
   "flags": []
  },
- "context_advice": "As an adult not pregnant, the main concern is the possible extra lowering of blood sugar; regular meals and monitoring can help keep you safe.",
+ "context_advice": "As a standard adult, you can usually take metformin and lisinopril together, but keep an eye on low blood‑sugar symptoms and discuss any concerns with your doctor or pharmacist.",
  "drugs": [
   {
    "input": "Metformin",
@@ -142,29 +142,29 @@
     "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22+AND+patient.drug.openfda.generic_name%3A%22lisinopril%22&count=patient.reaction.reactionmeddrapt.exact"
    },
    "explanation": {
-    "why": "Lisinopril can boost the blood‑sugar‑lowering effect of metformin, which may lead to low blood sugar (hypoglycemia).",
+    "why": "Both drugs lower blood sugar, so using them together can increase the blood‑glucose‑lowering effect and raise the chance of hypoglycemia.",
     "symptoms": [
-     "Sweating",
-     "Shakiness or tremor",
-     "Confusion or difficulty concentrating",
-     "Dizziness or light‑headedness"
+     "shakiness or tremor",
+     "sweating",
+     "confusion or difficulty concentrating",
+     "dizziness or light‑headedness"
     ],
-    "timing": "Watch for these signs especially when you first start both medicines or if your doses change; ask your doctor about checking your blood sugar regularly.",
+    "timing": "Check your blood glucose more often, especially when you first start both medicines or if doses are changed, and let your doctor know any low readings.",
     "questions": [
-     "Should I check my blood sugar more often while I’m on both drugs?",
-     "What are the early signs of low blood sugar I should look for?",
-     "Do I need to adjust the dose of metformin or lisinopril because of this interaction?"
+     "Should I check my blood sugar more frequently while on these medicines?",
+     "What symptoms of low blood sugar should I watch for?",
+     "Might my metformin dose need to be adjusted because of lisinopril?"
     ]
    }
   }
  ],
  "context_notes": [],
  "questions": [
-  "Should I check my blood sugar more often while I’m on both drugs?",
-  "What are the early signs of low blood sugar I should look for?",
-  "How will metformin and lisinopril work together to manage my diabetes and blood pressure?",
-  "Are there any diet or lifestyle changes I should make while taking both medicines?",
-  "What should I do if I experience side effects like nausea, diarrhea, or fatigue?"
+  "Should I check my blood sugar more frequently while on these medicines?",
+  "What symptoms of low blood sugar should I watch for?",
+  "How often should I have my blood pressure and blood sugar checked while taking these medicines?",
+  "Are there any foods, drinks, or activities I should avoid or modify?",
+  "What should I do if I experience side effects like nausea or fatigue?"
  ],
  "telemetry": {
   "rxnorm_urls": [
@@ -185,5 +185,5 @@
  "source": "groq",
  "model": "openai/gpt-oss-120b",
  "disclaimer": "Educational Decision-Support Only — Not Medical Advice: Always consult a licensed physician or pharmacist before starting, stopping, or changing any prescribed medication.",
- "generated_at": "2026-11-24T09:57:06Z"
+ "generated_at": "2026-11-24T10:05:28Z"
 }

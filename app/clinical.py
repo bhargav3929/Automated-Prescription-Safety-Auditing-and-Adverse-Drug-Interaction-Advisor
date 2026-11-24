@@ -229,7 +229,13 @@ def _window(s, term, size=420):
         return s
     pos = max(s.lower().find(term), 0)
     start = max(0, pos - size // 2)
+    if start:  # begin at a word boundary, not mid-word
+        nxt = s.find(" ", start)
+        start = nxt + 1 if 0 <= nxt < pos else start
     end = min(len(s), start + size)
+    if end < len(s):
+        prev = s.rfind(" ", start, end)
+        end = prev if prev > pos else end
     return ("…" if start else "") + s[start:end].strip() + ("…" if end < len(s) else "")
 
 
