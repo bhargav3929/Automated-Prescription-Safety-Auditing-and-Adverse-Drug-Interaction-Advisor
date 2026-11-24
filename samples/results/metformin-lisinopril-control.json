@@ -1,0 +1,174 @@
+{
+ "kind": "audit",
+ "input": {
+  "medications": [
+   "Metformin",
+   "Lisinopril"
+  ],
+  "context": [
+   "Standard Adult"
+  ]
+ },
+ "overall": {
+  "severity": "minor",
+  "severity_label": "Minor / Low Risk",
+  "verdict": "Low Interaction Risk — Minor Notes Only",
+  "safety_score": 95,
+  "counts": {
+   "none": 0,
+   "minor": 1,
+   "moderate": 0,
+   "major": 0
+  },
+  "summary": "You are taking metformin for diabetes and lisinopril for blood pressure. When used together they can make the blood‑sugar‑lowering effect of metformin a little stronger, which may cause mild low blood sugar. Watch for symptoms and ask your doctor or pharmacist how to monitor safely."
+ },
+ "context_advice": "",
+ "drugs": [
+  {
+   "input": "Metformin",
+   "name": "metformin",
+   "rxcui": "6809",
+   "rxnorm_name": "metformin",
+   "ingredients": [
+    {
+     "rxcui": "6809",
+     "name": "metformin"
+    }
+   ],
+   "tty": "IN",
+   "boxed_warning": "BOXED WARNING WARNING: LACTIC ACIDOSIS Postmarketing cases of metformin-associated lactic acidosis have resulted in death, hypothermia, hypotension, and resistant bradyarrhythmias. The onset of metformin­ associated lactic acidosis is often subtle, accompanied only by nonspecific symptoms such as malaise, myalgias, respiratory distress, somnolence, and abdominal pain. Metformin­ associated lactic acidosis was characterized by elevated blood lactate levels (>5 mmol/Liter), anion gap acidosis (without evidence of ketonuria or ketonemia), an increased lactate/pyruvate ratio; and metformin plasma ",
+   "sections_found": [
+    "boxed_warning",
+    "contraindications",
+    "drug_interactions",
+    "warnings_and_cautions"
+   ],
+   "brand_names": [
+    "Metformin Hydrochloride"
+   ],
+   "rxnorm_urls": [
+    "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=metformin&search=2",
+    "https://rxnav.nlm.nih.gov/REST/rxcui/6809/properties.json"
+   ],
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22metformin%22&limit=5"
+  },
+  {
+   "input": "Lisinopril",
+   "name": "lisinopril",
+   "rxcui": "29046",
+   "rxnorm_name": "lisinopril",
+   "ingredients": [
+    {
+     "rxcui": "29046",
+     "name": "lisinopril"
+    }
+   ],
+   "tty": "IN",
+   "boxed_warning": "WARNING: FETAL TOXICITY See full prescribing information for complete boxed warning. When pregnancy is detected, discontinue lisinopril as soon as possible. ( 5.1 ) Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus. ( 5.1 ) WARNING: FETAL TOXICITY When pregnancy is detected, discontinue lisinopril as soon as possible [see WARNINGS AND PRECAUTIONS ( 5.1 )] . Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus [see WARNINGS AND PRECAUTIONS ( 5.1 )] .",
+   "sections_found": [
+    "boxed_warning",
+    "contraindications",
+    "drug_interactions",
+    "warnings_and_cautions"
+   ],
+   "brand_names": [
+    "Lisinopril"
+   ],
+   "rxnorm_urls": [
+    "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=lisinopril&search=2",
+    "https://rxnav.nlm.nih.gov/REST/rxcui/29046/properties.json"
+   ],
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22lisinopril%22&limit=5"
+  }
+ ],
+ "pairs": [
+  {
+   "a": "metformin",
+   "b": "lisinopril",
+   "severity": "minor",
+   "severity_label": "Minor / Low Risk",
+   "basis": [
+    "drug interactions wording (class mention of “antidiabetic”)"
+   ],
+   "label_hits": [
+    {
+     "section": "drug_interactions",
+     "match": "class",
+     "term": "antidiabetic",
+     "text": "7.2 Antidiabetics Concomitant administration of lisinopril and antidiabetic medicines (insulins, oral hypoglycemic agents) may cause an increased blood-glucose-lowering effect with risk of hypoglycemia.",
+     "source": "lisinopril"
+    }
+   ],
+   "faers": {
+    "total": 51267,
+    "top_reactions": [
+     {
+      "term": "Nausea",
+      "count": 3684
+     },
+     {
+      "term": "Diarrhoea",
+      "count": 3326
+     },
+     {
+      "term": "Fatigue",
+      "count": 3181
+     },
+     {
+      "term": "Drug Ineffective",
+      "count": 2696
+     },
+     {
+      "term": "Vomiting",
+      "count": 2439
+     }
+    ],
+    "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22+AND+patient.drug.openfda.generic_name%3A%22lisinopril%22&limit=1",
+    "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22+AND+patient.drug.openfda.generic_name%3A%22lisinopril%22&count=patient.reaction.reactionmeddrapt.exact"
+   },
+   "explanation": {
+    "why": "Lisinopril can increase the effect of antidiabetic medicines like metformin, so your blood sugar may drop more than expected.",
+    "symptoms": [
+     "shakiness or tremor",
+     "sweating",
+     "dizziness or light‑headedness",
+     "confusion or difficulty concentrating"
+    ],
+    "timing": "The interaction can happen at any time, especially after starting or changing doses; check your blood sugar regularly and let your doctor know if you notice changes.",
+    "questions": [
+     "Should I check my blood sugar more often while I’m on both medicines?",
+     "Do I need to adjust my metformin dose because of lisinopril?",
+     "What should I do right away if I feel symptoms of low blood sugar?"
+    ]
+   }
+  }
+ ],
+ "context_notes": [],
+ "questions": [
+  "Should I check my blood sugar more often while I’m on both medicines?",
+  "Do I need to adjust my metformin dose because of lisinopril?",
+  "How often should I monitor my blood sugar while taking metformin and lisinopril?",
+  "Are there any foods, drinks, or activities that could make the interaction worse?",
+  "What steps should I take if I experience symptoms of low blood sugar?"
+ ],
+ "telemetry": {
+  "rxnorm_urls": [
+   "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=metformin&search=2",
+   "https://rxnav.nlm.nih.gov/REST/rxcui/6809/properties.json",
+   "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=lisinopril&search=2",
+   "https://rxnav.nlm.nih.gov/REST/rxcui/29046/properties.json"
+  ],
+  "label_urls": [
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22metformin%22&limit=5",
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22lisinopril%22&limit=5"
+  ],
+  "faers_urls": [
+   "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22+AND+patient.drug.openfda.generic_name%3A%22lisinopril%22&limit=1"
+  ],
+  "note": "FAERS counts are spontaneous reports in which both drugs were listed. They show reporting volume, not proof of cause or how likely a reaction is."
+ },
+ "source": "groq",
+ "model": "openai/gpt-oss-120b",
+ "disclaimer": "Educational Decision-Support Only — Not Medical Advice: Always consult a licensed physician or pharmacist before starting, stopping, or changing any prescribed medication.",
+ "generated_at": "2026-11-24T09:33:02Z"
+}

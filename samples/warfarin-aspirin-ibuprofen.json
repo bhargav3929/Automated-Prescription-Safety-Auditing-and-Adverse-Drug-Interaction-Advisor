@@ -1,0 +1,11 @@
+{
+ "id": "warfarin-aspirin-ibuprofen",
+ "title": "Warfarin + Aspirin + Ibuprofen \u2013 bleeding risk",
+ "input_text": "Warfarin, Aspirin, Ibuprofen",
+ "context": {
+  "flags": [
+   "older"
+  ]
+ },
+ "order": 1
+}

@@ -1,0 +1,397 @@
+{
+ "kind": "audit",
+ "input": {
+  "medications": [
+   "Warfarin",
+   "Aspirin",
+   "Ibuprofen"
+  ],
+  "context": [
+   "Older Adult (65+)"
+  ]
+ },
+ "overall": {
+  "severity": "major",
+  "severity_label": "Major / Contraindicated",
+  "verdict": "Major Interaction Flagged",
+  "safety_score": 0,
+  "counts": {
+   "none": 0,
+   "minor": 0,
+   "moderate": 0,
+   "major": 3
+  },
+  "summary": "You are taking warfarin, aspirin, and ibuprofen together. All three can raise your risk of serious bleeding and other problems, especially because you are over 65. Talk with your doctor or pharmacist about safer ways to manage pain and protect your heart."
+ },
+ "context_advice": "Because you are 65 or older, your risk of bleeding and stomach problems is higher, so close monitoring and careful choice of medicines are especially important.",
+ "drugs": [
+  {
+   "input": "Warfarin",
+   "name": "warfarin",
+   "rxcui": "11289",
+   "rxnorm_name": "warfarin",
+   "ingredients": [
+    {
+     "rxcui": "11289",
+     "name": "warfarin"
+    }
+   ],
+   "tty": "IN",
+   "boxed_warning": "WARNING: BLEEDING RISK Warfarin sodium can cause major or fatal bleeding [see Warnings and Precautions ( 5.1 )] . Perform regular monitoring of INR in all treated patients [see Dosage and Administration ( 2.1 )] . Drugs, dietary changes, and other factors affect INR levels achieved with warfarin sodium therapy [see Drug Interactions ( 7 )] . Instruct patients about prevention measures to minimize risk of bleeding and to report signs and symptoms of bleeding [see Patient Counseling Information ( 17 )] . WARNING: BLEEDING RISK See full prescribing information for complete boxed warning. Warfarin",
+   "sections_found": [
+    "boxed_warning",
+    "contraindications",
+    "drug_interactions",
+    "warnings_and_cautions"
+   ],
+   "brand_names": [
+    "Warfarin Sodium"
+   ],
+   "rxnorm_urls": [
+    "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=warfarin&search=2",
+    "https://rxnav.nlm.nih.gov/REST/rxcui/11289/properties.json"
+   ],
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22warfarin%22&limit=5"
+  },
+  {
+   "input": "Aspirin",
+   "name": "aspirin",
+   "rxcui": "1191",
+   "rxnorm_name": "aspirin",
+   "ingredients": [
+    {
+     "rxcui": "1191",
+     "name": "aspirin"
+    }
+   ],
+   "tty": "IN",
+   "boxed_warning": null,
+   "sections_found": [
+    "warnings"
+   ],
+   "brand_names": [
+    "Low Dose Aspirin"
+   ],
+   "rxnorm_urls": [
+    "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=aspirin&search=2",
+    "https://rxnav.nlm.nih.gov/REST/rxcui/1191/properties.json"
+   ],
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22aspirin%22&limit=5"
+  },
+  {
+   "input": "Ibuprofen",
+   "name": "ibuprofen",
+   "rxcui": "5640",
+   "rxnorm_name": "ibuprofen",
+   "ingredients": [
+    {
+     "rxcui": "5640",
+     "name": "ibuprofen"
+    }
+   ],
+   "tty": "IN",
+   "boxed_warning": "Cardiovascular Thrombotic Events Nonsteroidal anti-inflammatory drugs (NSAIDs) cause an increased risk of serious cardiovascular thrombotic events, including myocardial infarction and stroke, which can be fatal. This risk may occur early in treatment and may increase with duration of use [see Warnings and Precautions ]. Ibuprofen tablets are contraindicated in the setting of coronary artery bypass graft (CABG) surgery [see Contraindications and Warnings ]. Gastrointestinal Risk NSAIDs cause an increased risk of serious gastrointestinal adverse events including bleeding, ulceration, and perfora",
+   "sections_found": [
+    "boxed_warning",
+    "contraindications",
+    "drug_interactions",
+    "warnings"
+   ],
+   "brand_names": [
+    "Ibuprofen"
+   ],
+   "rxnorm_urls": [
+    "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=ibuprofen&search=2",
+    "https://rxnav.nlm.nih.gov/REST/rxcui/5640/properties.json"
+   ],
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22ibuprofen%22&limit=5"
+  }
+ ],
+ "pairs": [
+  {
+   "a": "warfarin",
+   "b": "aspirin",
+   "severity": "major",
+   "severity_label": "Major / Contraindicated",
+   "basis": [
+    "drug interactions wording (direct mention of “aspirin”)"
+   ],
+   "label_hits": [
+    {
+     "section": "drug_interactions",
+     "match": "direct",
+     "term": "aspirin",
+     "text": "Drugs that Can Increase the Risk of Bleeding Drug Class Specific Drugs Anticoagulants argatroban, dabigatran, bivalirudin, desirudin, heparin, lepirudin Antiplatelet Agents aspirin, cilostazol, clopidogrel, dipyridamole, prasugrel, ticlopidine Non-steroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, pirox…",
+     "source": "warfarin"
+    },
+    {
+     "section": "drug_interactions",
+     "match": "class",
+     "term": "antiplatelet",
+     "text": "Some botanicals may cause bleeding events when taken alone (e.g., garlic and Ginkgo biloba) and may have anticoagulant, antiplatelet, and/or fibrinolytic properties.",
+     "source": "warfarin"
+    }
+   ],
+   "faers": {
+    "total": 13711,
+    "top_reactions": [
+     {
+      "term": "International Normalised Ratio Increased",
+      "count": 976
+     },
+     {
+      "term": "Fatigue",
+      "count": 943
+     },
+     {
+      "term": "Dyspnoea",
+      "count": 939
+     },
+     {
+      "term": "Dizziness",
+      "count": 721
+     },
+     {
+      "term": "Nausea",
+      "count": 720
+     }
+    ],
+    "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22aspirin%22&limit=1",
+    "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22aspirin%22&count=patient.reaction.reactionmeddrapt.exact"
+   },
+   "explanation": {
+    "why": "Both warfarin and aspirin thin the blood, so using them together can cause major or fatal bleeding.",
+    "symptoms": [
+     "unusual bruising",
+     "blood in urine or stool",
+     "bleeding that lasts a long time after a cut",
+     "black, tarry stools"
+    ],
+    "timing": "Taking them at the same time increases risk; your doctor may need to check your blood clotting (INR) more often.",
+    "questions": [
+     "Can I safely take aspirin while I am on warfarin?",
+     "How often should my INR be checked if I need both medicines?",
+     "Are there other medicines that can protect my heart without raising bleeding risk?"
+    ]
+   }
+  },
+  {
+   "a": "warfarin",
+   "b": "ibuprofen",
+   "severity": "major",
+   "severity_label": "Major / Contraindicated",
+   "basis": [
+    "drug interactions wording (direct mention of “ibuprofen”)"
+   ],
+   "label_hits": [
+    {
+     "section": "drug_interactions",
+     "match": "direct",
+     "term": "ibuprofen",
+     "text": "…n, desirudin, heparin, lepirudin Antiplatelet Agents aspirin, cilostazol, clopidogrel, dipyridamole, prasugrel, ticlopidine Non-steroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, piroxicam, sulindac Serotonin Reuptake Inhibitors citalopram, desvenlafaxine, duloxetine, escitalopram, fluoxetine, fluvoxami…",
+     "source": "warfarin"
+    },
+    {
+     "section": "warnings",
+     "match": "class",
+     "term": "anticoagulant",
+     "text": "Other factors that increase the risk of GI bleeding in patients treated with NSAIDs include concomitant use of oral corticosteroids or anticoagulants, longer duration of NSAID therapy, smoking, use of alcohol, older age, and poor general health status.",
+     "source": "ibuprofen"
+    }
+   ],
+   "faers": {
+    "total": 1813,
+    "top_reactions": [
+     {
+      "term": "Chronic Kidney Disease",
+      "count": 211
+     },
+     {
+      "term": "Renal Failure",
+      "count": 165
+     },
+     {
+      "term": "International Normalised Ratio Increased",
+      "count": 159
+     },
+     {
+      "term": "Acute Kidney Injury",
+      "count": 143
+     },
+     {
+      "term": "Dyspnoea",
+      "count": 131
+     }
+    ],
+    "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&limit=1",
+    "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&count=patient.reaction.reactionmeddrapt.exact"
+   },
+   "explanation": {
+    "why": "Ibuprofen is an NSAID that can irritate the stomach and also increase bleeding when used with warfarin.",
+    "symptoms": [
+     "stomach pain or heartburn",
+     "black or bloody stools",
+     "blood in urine",
+     "sudden drop in kidney function (less urine, swelling)"
+    ],
+    "timing": "Do not take them together; if both are needed, they should be spaced many hours apart and your doctor should monitor your blood and kidneys.",
+    "questions": [
+     "Is it safe to use ibuprofen for pain while I am on warfarin?",
+     "What signs of stomach bleeding should I watch for?",
+     "Do I need extra kidney tests while taking these drugs?"
+    ]
+   }
+  },
+  {
+   "a": "aspirin",
+   "b": "ibuprofen",
+   "severity": "major",
+   "severity_label": "Major / Contraindicated",
+   "basis": [
+    "drug interactions wording (direct mention of “aspirin”)"
+   ],
+   "label_hits": [
+    {
+     "section": "warnings",
+     "match": "class",
+     "term": "nsaid",
+     "text": "This product contains an NSAID, which may cause severe stomach bleeding.",
+     "source": "aspirin"
+    },
+    {
+     "section": "drug_interactions",
+     "match": "direct",
+     "term": "aspirin",
+     "text": "Preexisting asthma Patients with asthma may have aspirin-sensitive asthma.",
+     "source": "ibuprofen"
+    },
+    {
+     "section": "drug_interactions",
+     "match": "direct",
+     "term": "aspirin",
+     "text": "The use of aspirin in patients with aspirin-sensitive asthma has been associated with severe bronchospasm, which can be fatal.",
+     "source": "ibuprofen"
+    },
+    {
+     "section": "drug_interactions",
+     "match": "direct",
+     "term": "aspirin",
+     "text": "Since cross reactivity, including bronchospasm, between aspirin and NSAIDs has been reported in such aspirin-sensitive patients, ibuprofen tablets should not be administered to patients with this form of aspirin sensitivity and should be used with caution in patients with preexisting asthma.",
+     "source": "ibuprofen"
+    },
+    {
+     "section": "warnings",
+     "match": "direct",
+     "term": "aspirin",
+     "text": "There is no consistent evidence that concurrent use of aspirin mitigates the increased risk of serious CV thrombotic events associated with NSAID use.",
+     "source": "ibuprofen"
+    },
+    {
+     "section": "warnings",
+     "match": "direct",
+     "term": "aspirin",
+     "text": "The concurrent use of aspirin and an NSAID, such as ibuprofen, increases the risk of serious gastrointestinal (GI) events [ see Warnings ].",
+     "source": "ibuprofen"
+    }
+   ],
+   "faers": {
+    "total": 25243,
+    "top_reactions": [
+     {
+      "term": "Fatigue",
+      "count": 2035
+     },
+     {
+      "term": "Nausea",
+      "count": 2023
+     },
+     {
+      "term": "Headache",
+      "count": 1695
+     },
+     {
+      "term": "Chronic Kidney Disease",
+      "count": 1650
+     },
+     {
+      "term": "Pain",
+      "count": 1530
+     }
+    ],
+    "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22aspirin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&limit=1",
+    "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22aspirin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&count=patient.reaction.reactionmeddrapt.exact"
+   },
+   "explanation": {
+    "why": "Both are NSAIDs and can cause severe stomach bleeding; aspirin can also trigger breathing problems in people with aspirin‑sensitive asthma.",
+    "symptoms": [
+     "stomach pain or nausea",
+     "vomiting blood or material that looks like coffee grounds",
+     "black stools",
+     "wheezing or shortness of breath"
+    ],
+    "timing": "Taking them together raises the chance of stomach bleeding; keep them separate or avoid using both at the same time.",
+    "questions": [
+     "Should I avoid using ibuprofen while I take aspirin?",
+     "What can I do to protect my stomach if I need pain relief?",
+     "If I have asthma, could aspirin and ibuprofen cause breathing problems?"
+    ]
+   }
+  }
+ ],
+ "context_notes": [
+  {
+   "drug": "warfarin",
+   "context": "older",
+   "section": "geriatric_use",
+   "text": "8.5 Geriatric Use Of the total number of patients receiving warfarin sodium in controlled clinical trials for which data were available for analysis, 1885 patients (24.4%) were 65 years and older, while 185 patients (2.4%) were 75 years and older."
+  },
+  {
+   "drug": "aspirin",
+   "context": "older",
+   "section": "warnings",
+   "text": "The chance is higher if you: are age 60 or older have had stomach ulcers or bleeding problems take a blood thinning (anticoagulant) or steroid drug take other drugs containing prescription or nonprescription NSAIDs [aspirin, ibuprofen, naproxen, or others] have 3 or more alcoholic drinks every day while using this product take more or for a longer time than directed Do not use "
+  },
+  {
+   "drug": "ibuprofen",
+   "context": "older",
+   "section": "boxed_warning",
+   "text": "Elderly patients are at greater risk for serious gastrointestinal events (see WARNINGS )."
+  }
+ ],
+ "questions": [
+  "Can I safely take aspirin while I am on warfarin?",
+  "How often should my INR be checked if I need both medicines?",
+  "Is it safe to use ibuprofen for pain while I am on warfarin?",
+  "What signs of stomach bleeding should I watch for?",
+  "Should I avoid using ibuprofen while I take aspirin?",
+  "What can I do to protect my stomach if I need pain relief?",
+  "What are the safest options for pain relief while I am on warfarin?",
+  "Are there any medicines I should completely avoid because of my blood thinner?",
+  "What warning signs mean I need urgent medical help?"
+ ],
+ "telemetry": {
+  "rxnorm_urls": [
+   "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=warfarin&search=2",
+   "https://rxnav.nlm.nih.gov/REST/rxcui/11289/properties.json",
+   "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=aspirin&search=2",
+   "https://rxnav.nlm.nih.gov/REST/rxcui/1191/properties.json",
+   "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=ibuprofen&search=2",
+   "https://rxnav.nlm.nih.gov/REST/rxcui/5640/properties.json"
+  ],
+  "label_urls": [
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22warfarin%22&limit=5",
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22aspirin%22&limit=5",
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22ibuprofen%22&limit=5"
+  ],
+  "faers_urls": [
+   "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22aspirin%22&limit=1",
+   "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&limit=1",
+   "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22aspirin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&limit=1"
+  ],
+  "note": "FAERS counts are spontaneous reports in which both drugs were listed. They show reporting volume, not proof of cause or how likely a reaction is."
+ },
+ "source": "groq",
+ "model": "openai/gpt-oss-120b",
+ "disclaimer": "Educational Decision-Support Only — Not Medical Advice: Always consult a licensed physician or pharmacist before starting, stopping, or changing any prescribed medication.",
+ "generated_at": "2026-11-24T09:33:05Z"
+}

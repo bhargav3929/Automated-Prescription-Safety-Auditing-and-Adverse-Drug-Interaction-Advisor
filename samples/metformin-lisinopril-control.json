@@ -1,0 +1,9 @@
+{
+ "id": "metformin-lisinopril-control",
+ "title": "Metformin + Lisinopril \u2013 common chronic-care control",
+ "input_text": "Metformin, Lisinopril",
+ "context": {
+  "flags": []
+ },
+ "order": 3
+}

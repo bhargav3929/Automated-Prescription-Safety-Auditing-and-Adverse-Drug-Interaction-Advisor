@@ -1,0 +1,12 @@
+{
+ "kind": "rejection",
+ "input": {
+  "medications": "Warfarin, Kryptonite200mg"
+ },
+ "http_status": 400,
+ "code": "BAD_INPUT",
+ "error": "Couldn't verify one or more medication names in RxNorm/openFDA: Kryptonite200mg. Check the spelling and try again.",
+ "quota_consumed": false,
+ "advice_returned": false,
+ "generated_at": "2026-11-24T09:33:00Z"
+}

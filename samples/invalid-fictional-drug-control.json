@@ -1,0 +1,10 @@
+{
+ "id": "invalid-fictional-drug-control",
+ "title": "Invalid drug control \u2013 fictional medicine",
+ "input_text": "Warfarin, Kryptonite200mg",
+ "context": {
+  "flags": []
+ },
+ "order": 4,
+ "expect_error": true
+}
