@@ -11,7 +11,7 @@ const Render = (() => {
     return e;
   }
   const kids = (parent, ...c) => { c.filter(Boolean).forEach((x) => parent.appendChild(x)); return parent; };
-  const badge = (sev) => el("span", "badge sev-" + sev, SEV[sev]);
+  const badge = (sev, text) => el("span", "badge sev-" + sev, text || SEV[sev]);
   const list = (items, cls) => { const ul = el("ul", cls); items.forEach((t) => ul.appendChild(el("li", null, t))); return ul; };
   const num = (n) => (n === null || n === undefined ? "n/a" : Number(n).toLocaleString());
 
@@ -24,12 +24,38 @@ const Render = (() => {
   function verdict(r) {
     const o = r.overall;
     const card = el("div", "verdict sev-" + o.severity);
-    const left = kids(el("div", "v-main"), el("div", "eyebrow", "Highest severity verdict"), el("h2", null, o.verdict), badge(o.severity), el("p", "summary", o.summary));
+    const left = kids(el("div", "v-main"), el("div", "eyebrow", "Highest severity verdict"), el("h2", null, o.verdict), badge(o.severity, o.severity_label), el("p", "summary", o.summary));
+    if (r.patient && r.patient.labels) left.appendChild(el("p", "ctx-line mono", "Patient context: " + r.patient.labels.join(" · ")));
     if (r.context_advice) left.appendChild(el("p", "ctx-advice", r.context_advice));
     const score = kids(el("div", "score"), el("div", "score-num mono", String(o.safety_score)), el("div", "score-cap", "Regimen safety score / 100"),
-      el("div", "score-counts mono", `${o.counts.major} major · ${o.counts.moderate} moderate · ${o.counts.minor} minor`));
+      el("div", "score-counts mono", `${o.counts.major} major · ${o.counts.moderate} moderate · ${o.counts.minor} minor pairs` + (o.alert_counts ? ` · ${o.alert_counts.major + o.alert_counts.moderate} alerts` : "")));
     kids(card, left, score);
     return card;
+  }
+
+  function alertsSection(r) {
+    const list_ = r.alerts || [];
+    if (!list_.length) return null;
+    const box = el("div", "sheet alerts sev-" + r.overall.severity);
+    box.appendChild(kids(el("div", "sheet-head"), el("h2", null, "Patient-Context & Safety Rule Alerts"),
+      el("span", "muted", "These rules apply to the patient, not just to drug-to-drug pairs, and they lower the safety score.")));
+    const pills = el("div", "alert-pills");
+    list_.forEach((a) => {
+      const d = el("details", "alert-pill sev-" + a.severity);
+      const sum = el("summary");
+      sum.appendChild(el("span", "alert-tag", a.label));
+      sum.appendChild(el("span", "alert-title", a.title));
+      d.appendChild(sum);
+      const body = el("div", "alert-body");
+      body.appendChild(el("p", null, a.explanation && a.explanation.why ? a.explanation.why : a.detail));
+      if (a.explanation && a.explanation.why && a.detail && a.explanation.why !== a.detail) body.appendChild(el("p", "muted", "Rule: " + a.detail));
+      (a.evidence || []).forEach((e) => body.appendChild(kids(el("blockquote", null), el("p", null, e.text), el("cite", "mono", `${cap(e.drug)} label · ${SEC[e.section] || e.section.replace(/_/g, " ")}`))));
+      body.appendChild(el("p", "mono muted", `Safety score ceiling: ${a.score_cap}/100`));
+      d.appendChild(body);
+      pills.appendChild(d);
+    });
+    box.appendChild(pills);
+    return box;
   }
 
   function pairDetail(p) {
@@ -87,6 +113,8 @@ const Render = (() => {
   function monograph(host, r, state) {
     host.replaceChildren();
     host.appendChild(verdict(r));
+    const al = alertsSection(r);
+    if (al) host.appendChild(al);
     const grid = el("div", "viz-grid");
     const netBox = kids(el("div", "sheet viz"), el("div", "sheet-head", ""));
     netBox.firstChild.appendChild(el("h2", null, "Pairwise interaction network"));
@@ -126,7 +154,7 @@ const Render = (() => {
     const b = r.baseline.overall, p = r.proposed.overall;
     const cmp = kids(el("div", "sheet compare"), el("h2", null, "Safer Alternative Explorer"), el("p", "cmp-head", r.comparison.headline));
     const cols = el("div", "cmp-cols");
-    const col = (title, meds, o) => kids(el("div", "cmp-col sev-" + o.severity), el("div", "eyebrow", title), el("div", "mono cmp-score", o.safety_score + " / 100"), badge(o.severity), el("p", "muted", meds.map(cap).join(" + ")));
+    const col = (title, meds, o) => kids(el("div", "cmp-col sev-" + o.severity), el("div", "eyebrow", title), el("div", "mono cmp-score", o.safety_score + " / 100"), badge(o.severity, o.severity_label), el("p", "muted", meds.map(cap).join(" + ")));
     kids(cols, col("Current regimen", r.baseline.medications, b), col("With the alternative", r.proposed.drugs.map((d) => d.name), p));
     kids(cmp, cols, el("p", "cmp-dir mono", `Safety score change: ${r.comparison.score_change > 0 ? "+" : ""}${r.comparison.score_change} (${r.comparison.direction})`));
     host.appendChild(cmp);

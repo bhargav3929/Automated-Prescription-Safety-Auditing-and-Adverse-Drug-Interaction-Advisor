@@ -14,6 +14,8 @@ TTL_LABEL = 7 * 86400
 TTL_EVENT = 86400
 MIN_DRUGS, MAX_DRUGS = 2, 8
 SECTIONS = ["boxed_warning", "contraindications", "drug_interactions", "warnings", "warnings_and_cautions"]
+EXTRA_SECTIONS = ["geriatric_use", "pediatric_use", "pregnancy", "nursing_mothers", "pregnancy_or_breast_feeding",
+                  "use_in_specific_populations", "teratogenic_effects", "use_in_pregnancy"]
 SEVERITY_RANK = {"none": 0, "minor": 1, "moderate": 2, "major": 3}
 SEVERITY_LABEL = {"major": "Major / Contraindicated", "moderate": "Moderate / Monitor Closely",
                   "minor": "Minor / Low Risk", "none": "No Known Pairwise Flag"}
@@ -168,17 +170,24 @@ def _fda(path):
     return f"{config.OPENFDA_API_BASE}/{path}"
 
 
+def _label_rank(label, ingredient):
+    """Best label first: single-ingredient product that matches the generic name, with a drug_interactions section."""
+    gns = [g.lower() for g in (label.get("openfda", {}).get("generic_name") or [])]
+    single = any(g.split()[0] == ingredient and " and " not in g and "," not in g and "/" not in g for g in gns)
+    return (not single, not label.get("drug_interactions"), len(gns[0]) if gns else 99)
+
+
 async def fetch_label(client, ingredient):
-    """Return (label_or_None, url). Prefers a label that actually has a drug_interactions section."""
+    """Return (label_or_None, url). Prefers a single-ingredient label that has a drug_interactions section."""
     url = _fda("label.json")
     for field in ("openfda.generic_name", "openfda.substance_name"):
-        params = {"search": f'{field}:"{ingredient}"', "limit": 5}
+        params = {"search": f'{field}:"{ingredient}"', "limit": 25}
         status, body = await _get(client, url, params)
         results = body.get("results") or []
         if results:
-            results.sort(key=lambda r: (not r.get("drug_interactions"), not r.get("boxed_warning") and 0, len(" ".join(r.get("openfda", {}).get("generic_name", [""])))))
+            results.sort(key=lambda r: _label_rank(r, ingredient))
             return results[0], full_url(url, params)
-    return None, full_url(url, {"search": f'openfda.generic_name:"{ingredient}"', "limit": 5})
+    return None, full_url(url, {"search": f'openfda.generic_name:"{ingredient}"', "limit": 25})
 
 
 def _terms_for(drug, label):
@@ -202,7 +211,7 @@ def _terms_for(drug, label):
 
 def _section_texts(label):
     out = {}
-    for sec in SECTIONS + ["geriatric_use"]:
+    for sec in SECTIONS + EXTRA_SECTIONS:
         v = label.get(sec) if label else None
         if v:
             out[sec] = re.sub(r"\s+", " ", " ".join(v) if isinstance(v, list) else str(v)).strip()
@@ -357,14 +366,14 @@ async def gather_evidence(drugs):
 def context_notes(drugs, context):
     """Label sentences relevant to the patient context (kidney, liver, older adult, pregnancy, allergy)."""
     ctx = (context or {}).get("flags") or []
-    words = {"renal": r"renal|kidney", "hepatic": r"hepatic|liver", "older": r"geriatric|elderly|older|65 years", "pregnancy": r"pregnan|fetal|lactat", "allergy": r"allerg|hypersensitiv|anaphyla|angioedema"}
+    words = {"pediatric": r"pediatric|children|child|infant|neonat", "renal": r"renal|kidney", "hepatic": r"hepatic|liver", "older": r"geriatric|elderly|older|65 years", "pregnancy": r"pregnan|fetal|lactat", "allergy": r"allerg|hypersensitiv|anaphyla|angioedema"}
     notes = []
     for d in drugs:
         for flag in ctx:
             pat = words.get(flag)
             if not pat:
                 continue
-            sec_order = ["boxed_warning", "contraindications", "warnings_and_cautions", "warnings", "geriatric_use"]
+            sec_order = ["boxed_warning", "contraindications", "pediatric_use", "pregnancy", "pregnancy_or_breast_feeding", "nursing_mothers", "warnings_and_cautions", "warnings", "geriatric_use"]
             for sec in sec_order:
                 text = d["sections"].get(sec, "")
                 sent = next((s for s in _sentences(text) if re.search(pat, s, re.I)), None)

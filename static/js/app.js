@@ -111,9 +111,9 @@
       const id = b.dataset.id;
       b.classList.toggle("on", id === "standard" ? !state.flags.size && !state.custom : id === "custom" ? state.custom : state.flags.has(id));
     });
-    show($("ctx-custom"), state.custom);
+    show($("ctx-custom"), state.custom || state.flags.has("allergy"));
   }
-  const context = () => ({ flags: [...state.flags], custom: state.custom ? $("ctx-custom").value : "" });
+  const context = () => ({ flags: [...state.flags], custom: state.custom || state.flags.has("allergy") ? $("ctx-custom").value : "" });
   function setContext(flags) {
     state.flags = new Set(flags || []); state.custom = false; syncContext();
   }

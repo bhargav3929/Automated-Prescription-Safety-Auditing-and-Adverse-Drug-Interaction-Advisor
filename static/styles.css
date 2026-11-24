@@ -169,3 +169,19 @@ ul.urls { list-style: none; padding: 0; margin: 0; } ul.urls li { margin: 4px 0;
   #sheet-view { display: block !important; }
   body { background: #fff; }
 }
+
+/* patient-context & safety rule alerts */
+.alerts { border-bottom-color: var(--major); }
+.alerts.sev-moderate { border-bottom-color: var(--coral); }
+.alert-pills { display: grid; gap: 8px; }
+.alert-pill { border: 1px solid; border-radius: 10px; background: #fff; }
+.alert-pill.sev-major { border-color: #FDA4AF; background: var(--major-bg); }
+.alert-pill.sev-moderate { border-color: #FDBA74; background: var(--mod-bg); }
+.alert-pill summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 10px 14px; list-style: none; }
+.alert-pill summary::-webkit-details-marker { display: none; }
+.alert-tag { font: 600 12px var(--mono); padding: 3px 10px; border-radius: 999px; color: #fff; }
+.alert-pill.sev-major .alert-tag { background: var(--major); }
+.alert-pill.sev-moderate .alert-tag { background: var(--mod); }
+.alert-title { font-weight: 600; }
+.alert-body { padding: 0 14px 12px; }
+.ctx-line { font-size: 12px; color: var(--muted); margin: 8px 0 0; }

@@ -13,7 +13,7 @@
  "overall": {
   "severity": "major",
   "severity_label": "Major / Contraindicated",
-  "verdict": "Major Interaction Flagged",
+  "verdict": "Major Interaction and Patient-Safety Alert Flagged",
   "safety_score": 0,
   "counts": {
    "none": 0,
@@ -21,9 +21,49 @@
    "moderate": 0,
    "major": 3
   },
-  "summary": "You are taking warfarin, aspirin, and ibuprofen together. All three can raise your risk of serious bleeding and other problems, especially because you are over 65. Talk with your doctor or pharmacist about safer ways to manage pain and protect your heart."
+  "alert_counts": {
+   "none": 0,
+   "minor": 0,
+   "moderate": 0,
+   "major": 1
+  },
+  "driven_by": "both",
+  "summary": "Patient-safety alert: Therapeutic duplication: Aspirin + Ibuprofen are both NSAIDs (including aspirin). Your medicines—warfarin, aspirin, and ibuprofen—have major interactions that can cause serious bleeding and other health problems. Being 65 or older makes these risks higher. Talk with your doctor or pharmacist about these concerns."
  },
- "context_advice": "Because you are 65 or older, your risk of bleeding and stomach problems is higher, so close monitoring and careful choice of medicines are especially important.",
+ "alerts": [
+  {
+   "id": "duplication:aspirin+ibuprofen",
+   "kind": "duplication",
+   "severity": "major",
+   "label": "Major / Therapeutic Duplication (Same Drug Class)",
+   "drugs": [
+    "aspirin",
+    "ibuprofen"
+   ],
+   "title": "Therapeutic duplication: Aspirin + Ibuprofen are both NSAIDs (including aspirin)",
+   "detail": "Stacking NSAIDs adds up stomach ulcer, bleeding, kidney and heart risks without giving more pain relief. Ask the prescriber whether both are really needed.",
+   "evidence": [],
+   "score_cap": 40,
+   "explanation": {
+    "why": "Taking two NSAIDs at the same time adds up the risk of stomach ulcers, bleeding, kidney injury, and heart problems without giving you more pain relief.",
+    "questions": [
+     "Do I really need both aspirin and ibuprofen?",
+     "What single medication would work best for my pain and be safer for me?"
+    ]
+   }
+  }
+ ],
+ "patient": {
+  "labels": [
+   "Older Adult (65+)"
+  ],
+  "age_years": null,
+  "allergens": [],
+  "flags": [
+   "older"
+  ]
+ },
+ "context_advice": "Because you are over 65, you have a higher chance of bleeding and stomach problems from these drugs, so close monitoring and clear communication with your health‑care team are especially important.",
  "drugs": [
   {
    "input": "Warfarin",
@@ -37,7 +77,7 @@
     }
    ],
    "tty": "IN",
-   "boxed_warning": "WARNING: BLEEDING RISK Warfarin sodium can cause major or fatal bleeding [see Warnings and Precautions ( 5.1 )] . Perform regular monitoring of INR in all treated patients [see Dosage and Administration ( 2.1 )] . Drugs, dietary changes, and other factors affect INR levels achieved with warfarin sodium therapy [see Drug Interactions ( 7 )] . Instruct patients about prevention measures to minimize risk of bleeding and to report signs and symptoms of bleeding [see Patient Counseling Information ( 17 )] . WARNING: BLEEDING RISK See full prescribing information for complete boxed warning. Warfarin",
+   "boxed_warning": "WARNING: BLEEDING RISK Warfarin sodium can cause major or fatal bleeding [see Warnings and Precautions (5.1) ] . Perform regular monitoring of INR in all treated patients [see Dosage and Administration (2.1) ] . Drugs, dietary changes, and other factors affect INR levels achieved with warfarin sodium therapy [see Drug Interactions (7) ] . Instruct patients about prevention measures to minimize risk of bleeding and to report signs and symptoms of bleeding [see Patient Counseling Information (17) ] . WARNING: BLEEDING RISK See full prescribing information for complete boxed warning. Warfarin sod",
    "sections_found": [
     "boxed_warning",
     "contraindications",
@@ -51,7 +91,7 @@
     "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=warfarin&search=2",
     "https://rxnav.nlm.nih.gov/REST/rxcui/11289/properties.json"
    ],
-   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22warfarin%22&limit=5"
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22warfarin%22&limit=25"
   },
   {
    "input": "Aspirin",
@@ -76,7 +116,7 @@
     "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=aspirin&search=2",
     "https://rxnav.nlm.nih.gov/REST/rxcui/1191/properties.json"
    ],
-   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22aspirin%22&limit=5"
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22aspirin%22&limit=25"
   },
   {
    "input": "Ibuprofen",
@@ -104,7 +144,7 @@
     "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=ibuprofen&search=2",
     "https://rxnav.nlm.nih.gov/REST/rxcui/5640/properties.json"
    ],
-   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22ibuprofen%22&limit=5"
+   "label_url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22ibuprofen%22&limit=25"
   }
  ],
  "pairs": [
@@ -121,7 +161,7 @@
      "section": "drug_interactions",
      "match": "direct",
      "term": "aspirin",
-     "text": "Drugs that Can Increase the Risk of Bleeding Drug Class Specific Drugs Anticoagulants argatroban, dabigatran, bivalirudin, desirudin, heparin, lepirudin Antiplatelet Agents aspirin, cilostazol, clopidogrel, dipyridamole, prasugrel, ticlopidine Non-steroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, pirox…",
+     "text": "Drugs that Can Increase the Risk of Bleeding Drug Class Specific Drugs Anticoagulants argatroban, dabigatran, bivalirudin, desirudin, heparin, lepirudin Antiplatelet Agents aspirin, cilostazol, clopidogrel, dipyridamole, prasugrel, ticlopidine Nonsteroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, piroxi…",
      "source": "warfarin"
     },
     {
@@ -160,18 +200,18 @@
     "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22aspirin%22&count=patient.reaction.reactionmeddrapt.exact"
    },
    "explanation": {
-    "why": "Both warfarin and aspirin thin the blood, so using them together can cause major or fatal bleeding.",
+    "why": "Both warfarin and aspirin thin your blood, so using them together greatly raises the chance of dangerous bleeding.",
     "symptoms": [
-     "unusual bruising",
+     "easy bruising",
+     "nosebleeds",
      "blood in urine or stool",
-     "bleeding that lasts a long time after a cut",
-     "black, tarry stools"
+     "bleeding that lasts a long time after a cut"
     ],
-    "timing": "Taking them at the same time increases risk; your doctor may need to check your blood clotting (INR) more often.",
+    "timing": "They should not be taken together; your doctor may need to check your INR more often if both are used.",
     "questions": [
      "Can I safely take aspirin while I am on warfarin?",
-     "How often should my INR be checked if I need both medicines?",
-     "Are there other medicines that can protect my heart without raising bleeding risk?"
+     "Are there safer blood‑thinner options for me?",
+     "How often should my INR be checked if I need both medicines?"
     ]
    }
   },
@@ -188,7 +228,7 @@
      "section": "drug_interactions",
      "match": "direct",
      "term": "ibuprofen",
-     "text": "…n, desirudin, heparin, lepirudin Antiplatelet Agents aspirin, cilostazol, clopidogrel, dipyridamole, prasugrel, ticlopidine Non-steroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, piroxicam, sulindac Serotonin Reuptake Inhibitors citalopram, desvenlafaxine, duloxetine, escitalopram, fluoxetine, fluvoxami…",
+     "text": "…in, desirudin, heparin, lepirudin Antiplatelet Agents aspirin, cilostazol, clopidogrel, dipyridamole, prasugrel, ticlopidine Nonsteroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, piroxicam, sulindac Serotonin Reuptake Inhibitors citalopram, desvenlafaxine, duloxetine, escitalopram, fluoxetine, fluvoxami…",
      "source": "warfarin"
     },
     {
@@ -227,18 +267,18 @@
     "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&count=patient.reaction.reactionmeddrapt.exact"
    },
    "explanation": {
-    "why": "Ibuprofen is an NSAID that can irritate the stomach and also increase bleeding when used with warfarin.",
+    "why": "Ibuprofen can irritate the stomach and also increase bleeding risk when combined with warfarin, and it may affect kidney function.",
     "symptoms": [
      "stomach pain or heartburn",
-     "black or bloody stools",
+     "black or tarry stools",
      "blood in urine",
-     "sudden drop in kidney function (less urine, swelling)"
+     "unusual bruising or bleeding"
     ],
-    "timing": "Do not take them together; if both are needed, they should be spaced many hours apart and your doctor should monitor your blood and kidneys.",
+    "timing": "Avoid taking them together; close monitoring of INR and kidney labs may be needed.",
     "questions": [
-     "Is it safe to use ibuprofen for pain while I am on warfarin?",
-     "What signs of stomach bleeding should I watch for?",
-     "Do I need extra kidney tests while taking these drugs?"
+     "Is ibuprofen safe to use with my warfarin?",
+     "What pain relievers are safer for me?",
+     "Do I need extra blood or kidney tests while using both?"
     ]
    }
   },
@@ -322,29 +362,23 @@
     "reactions_url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22aspirin%22+AND+patient.drug.openfda.generic_name%3A%22ibuprofen%22&count=patient.reaction.reactionmeddrapt.exact"
    },
    "explanation": {
-    "why": "Both are NSAIDs and can cause severe stomach bleeding; aspirin can also trigger breathing problems in people with aspirin‑sensitive asthma.",
+    "why": "Both are NSAIDs; using them together adds up the risk of stomach ulcers, bleeding, kidney problems, and can reduce aspirin’s heart‑protective effect.",
     "symptoms": [
-     "stomach pain or nausea",
-     "vomiting blood or material that looks like coffee grounds",
-     "black stools",
-     "wheezing or shortness of breath"
+     "stomach upset or pain",
+     "vomiting blood",
+     "blood in stool",
+     "wheezing or asthma flare‑up"
     ],
-    "timing": "Taking them together raises the chance of stomach bleeding; keep them separate or avoid using both at the same time.",
+    "timing": "They should not be taken at the same time; discuss with your provider whether you need one, the other, or a different medication.",
     "questions": [
-     "Should I avoid using ibuprofen while I take aspirin?",
-     "What can I do to protect my stomach if I need pain relief?",
-     "If I have asthma, could aspirin and ibuprofen cause breathing problems?"
+     "Should I avoid using aspirin and ibuprofen together?",
+     "Is one of these enough for my pain relief?",
+     "What alternative medication can I use that won’t increase bleeding risk?"
     ]
    }
   }
  ],
  "context_notes": [
-  {
-   "drug": "warfarin",
-   "context": "older",
-   "section": "geriatric_use",
-   "text": "8.5 Geriatric Use Of the total number of patients receiving warfarin sodium in controlled clinical trials for which data were available for analysis, 1885 patients (24.4%) were 65 years and older, while 185 patients (2.4%) were 75 years and older."
-  },
   {
    "drug": "aspirin",
    "context": "older",
@@ -359,15 +393,16 @@
   }
  ],
  "questions": [
+  "Do I really need both aspirin and ibuprofen?",
+  "What single medication would work best for my pain and be safer for me?",
   "Can I safely take aspirin while I am on warfarin?",
-  "How often should my INR be checked if I need both medicines?",
-  "Is it safe to use ibuprofen for pain while I am on warfarin?",
-  "What signs of stomach bleeding should I watch for?",
-  "Should I avoid using ibuprofen while I take aspirin?",
-  "What can I do to protect my stomach if I need pain relief?",
-  "What are the safest options for pain relief while I am on warfarin?",
-  "Are there any medicines I should completely avoid because of my blood thinner?",
-  "What warning signs mean I need urgent medical help?"
+  "Are there safer blood‑thinner options for me?",
+  "Is ibuprofen safe to use with my warfarin?",
+  "What pain relievers are safer for me?",
+  "Should I avoid using aspirin and ibuprofen together?",
+  "Is one of these enough for my pain relief?",
+  "Are there safer alternatives to any of these medicines for my condition?",
+  "How often should I have blood tests (like INR) while I am on these drugs?"
  ],
  "telemetry": {
   "rxnorm_urls": [
@@ -379,9 +414,9 @@
    "https://rxnav.nlm.nih.gov/REST/rxcui/5640/properties.json"
   ],
   "label_urls": [
-   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22warfarin%22&limit=5",
-   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22aspirin%22&limit=5",
-   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22ibuprofen%22&limit=5"
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22warfarin%22&limit=25",
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22aspirin%22&limit=25",
+   "https://api.fda.gov/drug/label.json?search=openfda.generic_name%3A%22ibuprofen%22&limit=25"
   ],
   "faers_urls": [
    "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22warfarin%22+AND+patient.drug.openfda.generic_name%3A%22aspirin%22&limit=1",
@@ -393,5 +428,5 @@
  "source": "groq",
  "model": "openai/gpt-oss-120b",
  "disclaimer": "Educational Decision-Support Only — Not Medical Advice: Always consult a licensed physician or pharmacist before starting, stopping, or changing any prescribed medication.",
- "generated_at": "2026-11-24T09:33:05Z"
+ "generated_at": "2026-11-24T09:57:23Z"
 }
